@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: ahweenu-backend
+    env: linux
+    plan: free
+    branch: master
+    buildCommand: |
+      curl -s "https://get.sdkman.io" | bash && \
+      source "$HOME/.sdkman/bin/sdkman-init.sh" && \
+      sdk install java 17.0.8-tem && \
+      chmod +x mvnw && ./mvnw clean package -DskipTests
+    startCommand: java -jar target/Ahweenu-0.0.1-SNAPSHOT.jar
+    autoDeploy: true
