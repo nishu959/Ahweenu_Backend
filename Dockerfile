@@ -1,14 +1,13 @@
-# Start with a base image containing Java runtime
-FROM openjdk:17-jdk-alpine
-
-# Set the working directory inside the container
+FROM maven:3.9.10-sapmachine-17 AS build
 WORKDIR /app
+COPY pom.xml .
+COPY src ./src
+RUN mvn clean package -DskipTests
 
-# Copy the Maven build output (JAR file) into the container. Adjsut the name as needed.
-COPY target/Ahweenu-0.0.1-SNAPSHOT.jar app.jar
 
-# Expose the port on which your Spring Boot application will run
+FROM openjdk:26-jdk
+WORKDIR /app
+COPY --from=build /app/target/Ahweenu-0.0.1-SNAPSHOT.jar app.jar
 EXPOSE 5000
-
-# Run the JAR file
 ENTRYPOINT ["java", "-jar", "app.jar"]
+
