@@ -56,7 +56,7 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
-        config.setAllowedOrigins(List.of("http://localhost:4200","http://ahweenuapp.s3-website.eu-north-1.amazonaws.com","http://ahweenu.s3-website.eu-north-1.amazonaws.com"));
+        config.setAllowedOrigins(List.of("http://localhost:4200","http://ahweenuapp.s3-website.eu-north-1.amazonaws.com","http://ahweenu.s3-website.eu-north-1.amazonaws.com","https://ahweenu.netlify.app"));
         																				
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         config.setAllowedHeaders(List.of("*"));
